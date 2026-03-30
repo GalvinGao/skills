@@ -1,4 +1,5 @@
 ---
+name: setup-superset
 description: Create .superset/config.json with setup and teardown scripts for Superset workspaces.
 ---
 
