@@ -37,6 +37,7 @@ npx skills add -g GalvinGao/skills
 | [mediainfo](./skills/mediainfo/SKILL.md) | Inspect image/video assets with `ffprobe` for frontend work |
 | [no-use-effect](./skills/no-use-effect/SKILL.md) | Ban direct `useEffect` calls in React — use derived state, event handlers, data-fetching libraries, or `useMountEffect` instead |
 | [preheat](./skills/preheat/SKILL.md) | Explore a project and produce a local setup checklist (toolchain, deps, services, and manual steps) |
+| [pr-visual-evidence](./skills/pr-visual-evidence/SKILL.md) | Open a PR for a visual change with a screenshot as the first line of its description, uploaded with `gh attach` |
 | [ready](./skills/ready/SKILL.md) | Commit, push, and create a draft PR with summary and verification checklist |
 | [resolve-issues](./skills/resolve-issues/SKILL.md) | Fix GitHub issues one by one, each with a commit that closes it |
 | [setup-superset](./skills/setup-superset/SKILL.md) | Create `.superset/config.json` with setup and teardown scripts for Superset workspaces |
