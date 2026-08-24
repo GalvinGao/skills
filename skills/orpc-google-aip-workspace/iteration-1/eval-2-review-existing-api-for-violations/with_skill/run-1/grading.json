@@ -1,0 +1,60 @@
+{
+  "expectations": [
+    {
+      "text": "Identifies that `id: number` + `workspaceId` tuple should be a single hierarchical `name` string",
+      "passed": true,
+      "evidence": "Section 5 explicitly recommends name: z.string() with the full hierarchical path"
+    },
+    {
+      "text": "Identifies that embedded `workspace: { id, name }` should be a reference by name string",
+      "passed": true,
+      "evidence": "Section 4a says workspace should be z.string() reference, not embedded; references AIP-122 'References between resources'"
+    },
+    {
+      "text": "Identifies that verb-in-path (/get-user, /list-users, /user/new) should be resource-oriented paths",
+      "passed": true,
+      "evidence": "Section 2 with table identifying verb-in-path issues for each route"
+    },
+    {
+      "text": "Identifies that POST /list-users should be GET on a resource path",
+      "passed": true,
+      "evidence": "Section 3 explicitly: list must be GET, with reasoning about caching and idempotency"
+    },
+    {
+      "text": "Identifies that PUT for create should be POST",
+      "passed": true,
+      "evidence": "Section 3 table: createNewUser PUT \u2192 POST"
+    },
+    {
+      "text": "Identifies that PUT-full-replace for update should be PATCH-partial + updateMask",
+      "passed": true,
+      "evidence": "Section 3 explains PATCH vs PUT; section 6 adds updateMask"
+    },
+    {
+      "text": "Identifies that enum members should be UPPER_SNAKE_CASE with _UNSPECIFIED zero value",
+      "passed": true,
+      "evidence": "Section 9 explicitly calls out both: ADMIN/USER/GUEST + USER_ROLE_UNSPECIFIED sentinel"
+    },
+    {
+      "text": "Identifies that offset/limit pagination should be pageSize/pageToken",
+      "passed": true,
+      "evidence": "Section 8 cites AIP-130 verbatim and recommends pageSize + pageToken"
+    },
+    {
+      "text": "Cites at least two specific AIPs (e.g. AIP-121, AIP-122, AIP-126, AIP-130)",
+      "passed": true,
+      "evidence": "Cites AIP-121, AIP-122, AIP-123, AIP-126, AIP-130 \u2014 all five"
+    },
+    {
+      "text": "Provides a corrected version of the router (not just prose)",
+      "passed": true,
+      "evidence": "Full corrected router with schemas + procedures at lines 305-402"
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "pass_rate": 1.0
+  }
+}

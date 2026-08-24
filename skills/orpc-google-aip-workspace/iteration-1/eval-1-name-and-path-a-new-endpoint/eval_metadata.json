@@ -1,0 +1,15 @@
+{
+  "eval_id": 1,
+  "eval_name": "name-and-path-a-new-endpoint",
+  "prompt": "I have an existing oRPC API for an internal HR app. There's a `User` resource and an `Org` resource. I need to add an operation that suspends a user account — sets their status, revokes active sessions, and sends a notification. What should I name this endpoint, what HTTP method and path should it use, and what should the input/output look like? Show the oRPC code.",
+  "assertions": [
+    {"text": "Recommends a custom method (not standard create/update)"},
+    {"text": "Path uses colon-verb suffix (e.g. :suspend)"},
+    {"text": "Path is scoped under the User resource (orgs/{org}/users/{user} or users/{user})"},
+    {"text": "HTTP method is POST"},
+    {"text": "Input is minimal (just the resource name/path params, no resource body)"},
+    {"text": "Output returns the updated User resource (not void / not an Operation for a sync action)"},
+    {"text": "Explanation cites AIP-130 (or general reasoning about standard vs custom methods)"},
+    {"text": "Verb is camelCase imperative (suspend, suspendUser, or similar — not snake_case or kebab-case)"}
+  ]
+}

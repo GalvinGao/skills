@@ -1,0 +1,17 @@
+{
+  "eval_id": 2,
+  "eval_name": "review-existing-api-for-violations",
+  "prompt": "Review an oRPC router (User resource with numeric id, embedded workspace, /get-user paths, POST for list, PUT for create/update, lowercase enum, offset/limit pagination) and identify what's wrong with it.",
+  "assertions": [
+    {"text": "Identifies that `id: number` + `workspaceId` tuple should be a single hierarchical `name` string"},
+    {"text": "Identifies that embedded `workspace: { id, name }` should be a reference by name string"},
+    {"text": "Identifies that verb-in-path (/get-user, /list-users, /user/new) should be resource-oriented paths"},
+    {"text": "Identifies that POST /list-users should be GET on a resource path"},
+    {"text": "Identifies that PUT for create should be POST"},
+    {"text": "Identifies that PUT-full-replace for update should be PATCH-partial + updateMask"},
+    {"text": "Identifies that enum members should be UPPER_SNAKE_CASE with _UNSPECIFIED zero value"},
+    {"text": "Identifies that offset/limit pagination should be pageSize/pageToken"},
+    {"text": "Cites at least two specific AIPs (e.g. AIP-121, AIP-122, AIP-126, AIP-130)"},
+    {"text": "Provides a corrected version of the router (not just prose)"}
+  ]
+}

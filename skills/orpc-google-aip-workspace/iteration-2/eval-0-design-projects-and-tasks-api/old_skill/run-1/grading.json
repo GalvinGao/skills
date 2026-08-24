@@ -1,0 +1,19 @@
+{
+  "summary": {"passed": 13, "failed": 1, "total": 14, "pass_rate": 0.929},
+  "expectations": [
+    {"text": "Project path uses hierarchical pattern workspaces/{workspace}/projects/{project}", "passed": true, "evidence": "lines 257-258"},
+    {"text": "Task path uses hierarchical pattern workspaces/{workspace}/projects/{project}/tasks/{task}", "passed": true, "evidence": "lines 318-319"},
+    {"text": "Update procedure uses HTTP PATCH (not PUT)", "passed": true, "evidence": "lines 276, 345"},
+    {"text": "Create procedure uses HTTP POST", "passed": true, "evidence": "lines 267, 329"},
+    {"text": "Delete procedure uses HTTP DELETE", "passed": true, "evidence": "lines 287, 356"},
+    {"text": "List procedure uses HTTP GET", "passed": true, "evidence": "line 248, 302"},
+    {"text": "Get procedure uses HTTP GET", "passed": true, "evidence": "lines 257, 318"},
+    {"text": "List input uses limit + cursor pagination (not offset/limit, not pageSize/pageToken)", "passed": false, "evidence": "Uses pageSize and pageToken (lines 55-56) — the v1 skill's naming"},
+    {"text": "Status enum has a *_UNSPECIFIED zero-value member", "passed": true, "evidence": "TASK_STATUS_UNSPECIFIED line 72"},
+    {"text": "Priority enum has a *_UNSPECIFIED zero-value member", "passed": true, "evidence": "TASK_PRIORITY_UNSPECIFIED line 91"},
+    {"text": "Enum members use UPPER_SNAKE_CASE (e.g. IN_PROGRESS, not in-progress)", "passed": true, "evidence": "TASK_STATUS_IN_PROGRESS etc."},
+    {"text": "Project and Task schemas expose a `name: string` field as canonical identifier", "passed": true, "evidence": "name field present"},
+    {"text": "Task does NOT embed Project as a nested object (references by name string instead)", "passed": true, "evidence": "uses parent string"},
+    {"text": "Update input is partial (mutable fields optional, full resource not required)", "passed": true, "evidence": "lines 163, 230 use .partial() (with updateMask, which is not required by the new assertions)"}
+  ]
+}

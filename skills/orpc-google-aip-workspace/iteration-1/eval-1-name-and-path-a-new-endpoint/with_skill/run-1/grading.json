@@ -1,0 +1,50 @@
+{
+  "expectations": [
+    {
+      "text": "Recommends a custom method (not standard create/update)",
+      "passed": true,
+      "evidence": "Section 'Why a custom :suspend method instead of update' walks AIP-130 priority order"
+    },
+    {
+      "text": "Path uses colon-verb suffix (e.g. :suspend)",
+      "passed": true,
+      "evidence": "path: '/organizations/{organization}/users/{user}:suspend'"
+    },
+    {
+      "text": "Path is scoped under the User resource (orgs/{org}/users/{user} or users/{user})",
+      "passed": true,
+      "evidence": "organizations/{organization}/users/{user}"
+    },
+    {
+      "text": "HTTP method is POST",
+      "passed": true,
+      "evidence": "method: 'POST'"
+    },
+    {
+      "text": "Input is minimal (just the resource name/path params, no resource body)",
+      "passed": true,
+      "evidence": "SuspendUserInput has organization, user, reason?, notify?, etag? \u2014 no full User body"
+    },
+    {
+      "text": "Output returns the updated User resource (not void / not an Operation for a sync action)",
+      "passed": true,
+      "evidence": "SuspendUserOutput = User"
+    },
+    {
+      "text": "Explanation cites AIP-130 (or general reasoning about standard vs custom methods)",
+      "passed": true,
+      "evidence": "Cites AIP-130, AIP-121, AIP-122, AIP-126 throughout"
+    },
+    {
+      "text": "Verb is camelCase imperative (suspend, suspendUser, or similar \u2014 not snake_case or kebab-case)",
+      "passed": true,
+      "evidence": "verb 'suspend' is lowercase imperative"
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  }
+}

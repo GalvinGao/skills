@@ -1,0 +1,90 @@
+{
+  "expectations": [
+    {
+      "text": "Project path uses hierarchical pattern workspaces/{workspace}/projects/{project}",
+      "passed": false,
+      "evidence": "only listProjects/createProject use hierarchical path; get/update/delete use flat /projects/{id}"
+    },
+    {
+      "text": "Task path uses hierarchical pattern workspaces/{workspace}/projects/{project}/tasks/{task}",
+      "passed": false,
+      "evidence": "list/create use /projects/{projectId}/tasks but get/update/delete use flat /tasks/{id}"
+    },
+    {
+      "text": "Collection identifiers (workspaces, projects, tasks) are lowercase plural camelCase",
+      "passed": true,
+      "evidence": "workspaces, projects, tasks all lowercase plural"
+    },
+    {
+      "text": "Update procedure uses HTTP PATCH (not PUT)",
+      "passed": true,
+      "evidence": "lines 102 and 198 use method: 'PATCH'"
+    },
+    {
+      "text": "Create procedure uses HTTP POST",
+      "passed": true,
+      "evidence": "lines 93 and 189"
+    },
+    {
+      "text": "Delete procedure uses HTTP DELETE",
+      "passed": true,
+      "evidence": "lines 111 and 207"
+    },
+    {
+      "text": "List procedure uses HTTP GET",
+      "passed": true,
+      "evidence": "lines 75 and 171"
+    },
+    {
+      "text": "Get procedure uses HTTP GET",
+      "passed": true,
+      "evidence": "lines 84 and 180"
+    },
+    {
+      "text": "List input uses pageSize/pageToken cursor pagination (not offset/limit)",
+      "passed": false,
+      "evidence": "PaginationInput uses 'limit' and 'cursor' fields at lines 28-31"
+    },
+    {
+      "text": "Status enum has a *_UNSPECIFIED zero-value member",
+      "passed": false,
+      "evidence": "TaskStatus = z.enum(['todo','in_progress','blocked','done']) \u2014 no UNSPECIFIED"
+    },
+    {
+      "text": "Priority enum has a *_UNSPECIFIED zero-value member",
+      "passed": false,
+      "evidence": "TaskPriority has only low/medium/high"
+    },
+    {
+      "text": "Enum members use UPPER_SNAKE_CASE (e.g. IN_PROGRESS, not in-progress)",
+      "passed": false,
+      "evidence": "members are lowercase snake_case: 'in_progress' etc."
+    },
+    {
+      "text": "Project and Task schemas expose a `name: string` field as canonical identifier",
+      "passed": false,
+      "evidence": "schemas use `id: Id` (a string) but field name is 'id' not 'name'; uses workspaceId/projectId tuple"
+    },
+    {
+      "text": "Task does NOT embed Project as a nested object (references by name string instead)",
+      "passed": true,
+      "evidence": "projectId: Id field, not embedded Project object"
+    },
+    {
+      "text": "Update input supports partial fields + updateMask (not full resource replace)",
+      "passed": false,
+      "evidence": "UpdateProjectInput/UpdateTaskInput have optional fields (partial-like) but no updateMask"
+    },
+    {
+      "text": "List/create inputs include a `parent` string field for the parent resource",
+      "passed": false,
+      "evidence": "uses 'workspaceId' and 'projectId' fields, not a 'parent' string"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 9,
+    "total": 16,
+    "pass_rate": 0.4375
+  }
+}

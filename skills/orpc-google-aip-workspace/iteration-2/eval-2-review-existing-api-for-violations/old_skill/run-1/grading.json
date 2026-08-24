@@ -1,0 +1,14 @@
+{
+  "summary": {"passed": 8, "failed": 1, "total": 9, "pass_rate": 0.889},
+  "expectations": [
+    {"text": "Identifies that `id: number` + `workspaceId` tuple should be a single hierarchical `name` string", "passed": true, "evidence": "point 4 + corrected schema use name: string"},
+    {"text": "Identifies that verb-in-path (/get-user, /list-users, /user/new) should be resource-oriented paths", "passed": true, "evidence": "point 2 explicit"},
+    {"text": "Identifies that POST /list-users should be GET on a resource path", "passed": true, "evidence": "line 41 'Method must be GET'"},
+    {"text": "Identifies that PUT for create should be POST", "passed": true, "evidence": "line 56 'Method must be POST, not PUT'"},
+    {"text": "Identifies that PUT-full-replace for update should be PATCH-partial", "passed": true, "evidence": "line 73 'Method must be PATCH, not PUT'"},
+    {"text": "Identifies that enum members should be UPPER_SNAKE_CASE with _UNSPECIFIED zero value", "passed": true, "evidence": "point 8 + corrected schema with ROLE_UNSPECIFIED"},
+    {"text": "Identifies that offset-based pagination should be cursor-based (limit + cursor)", "passed": false, "evidence": "Identifies offset is wrong but recommends pageSize/pageToken (v1 naming) at lines 43 and 123, not limit/cursor"},
+    {"text": "Cites at least two specific AIPs (e.g. AIP-121, AIP-126, AIP-130)", "passed": true, "evidence": "Cites AIP-121, AIP-122, AIP-123, AIP-126, AIP-130"},
+    {"text": "Provides a corrected version of the router (not just prose)", "passed": true, "evidence": "Full corrected router included"}
+  ]
+}

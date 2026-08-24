@@ -36,6 +36,7 @@ npx skills add -g GalvinGao/skills
 | [issues-dump](./skills/issues-dump/SKILL.md) | Convert informal issue dumps into GitHub issues via `gh` CLI |
 | [mediainfo](./skills/mediainfo/SKILL.md) | Inspect image/video assets with `ffprobe` for frontend work |
 | [no-use-effect](./skills/no-use-effect/SKILL.md) | Ban direct `useEffect` calls in React — use derived state, event handlers, data-fetching libraries, or `useMountEffect` instead |
+| [orpc-google-aip](./skills/orpc-google-aip/SKILL.md) | Apply Google AIP-121/126/130 resource, enum, and method conventions when you design oRPC procedures, routers, and Zod resource schemas |
 | [preheat](./skills/preheat/SKILL.md) | Explore a project and produce a local setup checklist (toolchain, deps, services, and manual steps) |
 | [pr-visual-evidence](./skills/pr-visual-evidence/SKILL.md) | Open a PR for a visual change with a screenshot as the first line of its description, uploaded with `gh attach` |
 | [ready](./skills/ready/SKILL.md) | Commit, push, and create a draft PR with summary and verification checklist |

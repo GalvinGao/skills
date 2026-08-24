@@ -1,0 +1,11 @@
+{
+  "summary": {"passed": 6, "failed": 0, "total": 6, "pass_rate": 1.0},
+  "expectations": [
+    {"text": "Recommends a custom method (not standard create/update)", "passed": true, "evidence": "recommends users.suspend custom method"},
+    {"text": "Path uses colon-verb suffix (e.g. :suspend)", "passed": true, "evidence": "POST /orgs/{org}/users/{user}:suspend"},
+    {"text": "Path is scoped under the User resource", "passed": true, "evidence": "/orgs/{org}/users/{user}"},
+    {"text": "HTTP method is POST", "passed": true, "evidence": "POST"},
+    {"text": "Output returns the updated User resource", "passed": true, "evidence": "returns User resource"},
+    {"text": "Verb is camelCase imperative (suspend, suspendUser, or similar)", "passed": true, "evidence": "suspend"}
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "expectations": [
+    {
+      "text": "Identifies that `id: number` + `workspaceId` tuple should be a single hierarchical `name` string",
+      "passed": false,
+      "evidence": "Discusses branded ids and recommends strings over numbers, but does not propose a single `name: string` field that encodes the hierarchical path \u2014 keeps separate id/workspaceId"
+    },
+    {
+      "text": "Identifies that embedded `workspace: { id, name }` should be a reference by name string",
+      "passed": false,
+      "evidence": "Only says workspace 'shouldn't be a nested object on create' (path-derived). The corrected User schema still embeds the full Workspace object at line 225-226"
+    },
+    {
+      "text": "Identifies that verb-in-path (/get-user, /list-users, /user/new) should be resource-oriented paths",
+      "passed": true,
+      "evidence": "Section 2.1 explicitly: 'Verbs in paths. /get-user, /list-users, /user/new, /user/update all embed the action in the URL.'"
+    },
+    {
+      "text": "Identifies that POST /list-users should be GET on a resource path",
+      "passed": true,
+      "evidence": "Section 1: 'listAllUsers POST should be GET'"
+    },
+    {
+      "text": "Identifies that PUT for create should be POST",
+      "passed": true,
+      "evidence": "Section 1: 'createNewUser PUT should be POST'"
+    },
+    {
+      "text": "Identifies that PUT-full-replace for update should be PATCH-partial + updateMask",
+      "passed": true,
+      "evidence": "Section 1 + section 4 recommend PATCH with partial; mentions update_mask per AIP-134"
+    },
+    {
+      "text": "Identifies that enum members should be UPPER_SNAKE_CASE with _UNSPECIFIED zero value",
+      "passed": false,
+      "evidence": "Section 9 discusses enum future-proofing but does not flag UPPER_SNAKE_CASE convention or the _UNSPECIFIED sentinel; corrected schema keeps lowercase 'admin','user','guest'"
+    },
+    {
+      "text": "Identifies that offset/limit pagination should be pageSize/pageToken",
+      "passed": true,
+      "evidence": "Section 5 explicitly recommends pageSize/pageToken citing AIP-158"
+    },
+    {
+      "text": "Cites at least two specific AIPs (e.g. AIP-121, AIP-122, AIP-126, AIP-130)",
+      "passed": true,
+      "evidence": "Cites AIP-122, AIP-130, AIP-133, AIP-134, AIP-136, AIP-158"
+    },
+    {
+      "text": "Provides a corrected version of the router (not just prose)",
+      "passed": true,
+      "evidence": "Full corrected router at lines 202-300"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 3,
+    "total": 10,
+    "pass_rate": 0.7
+  }
+}

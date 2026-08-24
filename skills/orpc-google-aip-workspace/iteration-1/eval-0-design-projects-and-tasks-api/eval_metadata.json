@@ -1,0 +1,23 @@
+{
+  "eval_id": 0,
+  "eval_name": "design-projects-and-tasks-api",
+  "prompt": "I'm building a project management tool with oRPC. Design the API surface for `Project` (belongs to a `Workspace`) and `Task` (belongs to a `Project`). Each task has a status (todo/in-progress/blocked/done) and a priority (low/medium/high). I want to be able to list, fetch, create, update, and delete both. Show me the Zod schemas and oRPC procedures with HTTP routes. Don't bother implementing the handlers — leave them as stubs.",
+  "assertions": [
+    {"text": "Project path uses hierarchical pattern workspaces/{workspace}/projects/{project}"},
+    {"text": "Task path uses hierarchical pattern workspaces/{workspace}/projects/{project}/tasks/{task}"},
+    {"text": "Collection identifiers (workspaces, projects, tasks) are lowercase plural camelCase"},
+    {"text": "Update procedure uses HTTP PATCH (not PUT)"},
+    {"text": "Create procedure uses HTTP POST"},
+    {"text": "Delete procedure uses HTTP DELETE"},
+    {"text": "List procedure uses HTTP GET"},
+    {"text": "Get procedure uses HTTP GET"},
+    {"text": "List input uses pageSize/pageToken cursor pagination (not offset/limit)"},
+    {"text": "Status enum has a *_UNSPECIFIED zero-value member"},
+    {"text": "Priority enum has a *_UNSPECIFIED zero-value member"},
+    {"text": "Enum members use UPPER_SNAKE_CASE (e.g. IN_PROGRESS, not in-progress)"},
+    {"text": "Project and Task schemas expose a `name: string` field as canonical identifier"},
+    {"text": "Task does NOT embed Project as a nested object (references by name string instead)"},
+    {"text": "Update input supports partial fields + updateMask (not full resource replace)"},
+    {"text": "List/create inputs include a `parent` string field for the parent resource"}
+  ]
+}

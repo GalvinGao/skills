@@ -1,0 +1,19 @@
+{
+  "summary": {"passed": 14, "failed": 0, "total": 14, "pass_rate": 1.0},
+  "expectations": [
+    {"text": "Project path uses hierarchical pattern workspaces/{workspace}/projects/{project}", "passed": true, "evidence": "all project routes use the full hierarchical path"},
+    {"text": "Task path uses hierarchical pattern workspaces/{workspace}/projects/{project}/tasks/{task}", "passed": true, "evidence": "all task routes use the full hierarchical path"},
+    {"text": "Update procedure uses HTTP PATCH (not PUT)", "passed": true, "evidence": "lines 167 and 298"},
+    {"text": "Create procedure uses HTTP POST", "passed": true, "evidence": "lines 158 and 287"},
+    {"text": "Delete procedure uses HTTP DELETE", "passed": true, "evidence": "lines 178 and 309"},
+    {"text": "List procedure uses HTTP GET", "passed": true, "evidence": "lines 139 and 265"},
+    {"text": "Get procedure uses HTTP GET", "passed": true, "evidence": "lines 148 and 276"},
+    {"text": "List input uses limit + cursor pagination (not offset/limit, not pageSize/pageToken)", "passed": true, "evidence": "PageInput defines limit and cursor at lines 30-32"},
+    {"text": "Status enum has a *_UNSPECIFIED zero-value member", "passed": true, "evidence": "TASK_STATUS_UNSPECIFIED at line 45"},
+    {"text": "Priority enum has a *_UNSPECIFIED zero-value member", "passed": true, "evidence": "TASK_PRIORITY_UNSPECIFIED at line 61"},
+    {"text": "Enum members use UPPER_SNAKE_CASE (e.g. IN_PROGRESS, not in-progress)", "passed": true, "evidence": "IN_PROGRESS, BLOCKED, HIGH etc."},
+    {"text": "Project and Task schemas expose a `name: string` field as canonical identifier", "passed": true, "evidence": "name field on Project (line 84) and Task (line 198)"},
+    {"text": "Task does NOT embed Project as a nested object (references by name string instead)", "passed": true, "evidence": "task accessed via parent string path; assignee is also a name string at line 207-211"},
+    {"text": "Update input is partial (mutable fields optional, full resource not required)", "passed": true, "evidence": "patch: ProjectWritable.partial() at line 128; same for tasks line 252"}
+  ]
+}

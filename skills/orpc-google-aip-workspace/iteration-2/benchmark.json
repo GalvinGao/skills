@@ -1,0 +1,463 @@
+{
+  "metadata": {
+    "skill_name": "orpc-google-aip",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-05-30T09:15:46Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.929,
+        "passed": 13,
+        "failed": 1,
+        "total": 14,
+        "time_seconds": 114.3,
+        "tokens": 47783,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Project path uses hierarchical pattern workspaces/{workspace}/projects/{project}",
+          "passed": true,
+          "evidence": "lines 257-258"
+        },
+        {
+          "text": "Task path uses hierarchical pattern workspaces/{workspace}/projects/{project}/tasks/{task}",
+          "passed": true,
+          "evidence": "lines 318-319"
+        },
+        {
+          "text": "Update procedure uses HTTP PATCH (not PUT)",
+          "passed": true,
+          "evidence": "lines 276, 345"
+        },
+        {
+          "text": "Create procedure uses HTTP POST",
+          "passed": true,
+          "evidence": "lines 267, 329"
+        },
+        {
+          "text": "Delete procedure uses HTTP DELETE",
+          "passed": true,
+          "evidence": "lines 287, 356"
+        },
+        {
+          "text": "List procedure uses HTTP GET",
+          "passed": true,
+          "evidence": "line 248, 302"
+        },
+        {
+          "text": "Get procedure uses HTTP GET",
+          "passed": true,
+          "evidence": "lines 257, 318"
+        },
+        {
+          "text": "List input uses limit + cursor pagination (not offset/limit, not pageSize/pageToken)",
+          "passed": false,
+          "evidence": "Uses pageSize and pageToken (lines 55-56) \u2014 the v1 skill's naming"
+        },
+        {
+          "text": "Status enum has a *_UNSPECIFIED zero-value member",
+          "passed": true,
+          "evidence": "TASK_STATUS_UNSPECIFIED line 72"
+        },
+        {
+          "text": "Priority enum has a *_UNSPECIFIED zero-value member",
+          "passed": true,
+          "evidence": "TASK_PRIORITY_UNSPECIFIED line 91"
+        },
+        {
+          "text": "Enum members use UPPER_SNAKE_CASE (e.g. IN_PROGRESS, not in-progress)",
+          "passed": true,
+          "evidence": "TASK_STATUS_IN_PROGRESS etc."
+        },
+        {
+          "text": "Project and Task schemas expose a `name: string` field as canonical identifier",
+          "passed": true,
+          "evidence": "name field present"
+        },
+        {
+          "text": "Task does NOT embed Project as a nested object (references by name string instead)",
+          "passed": true,
+          "evidence": "uses parent string"
+        },
+        {
+          "text": "Update input is partial (mutable fields optional, full resource not required)",
+          "passed": true,
+          "evidence": "lines 163, 230 use .partial() (with updateMask, which is not required by the new assertions)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 88.2,
+        "tokens": 41038,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends a custom method (not standard create/update)",
+          "passed": true,
+          "evidence": "recommends users.suspend custom method"
+        },
+        {
+          "text": "Path uses colon-verb suffix (e.g. :suspend)",
+          "passed": true,
+          "evidence": "POST /orgs/{org}/users/{user}:suspend"
+        },
+        {
+          "text": "Path is scoped under the User resource",
+          "passed": true,
+          "evidence": "/orgs/{org}/users/{user}"
+        },
+        {
+          "text": "HTTP method is POST",
+          "passed": true,
+          "evidence": "POST"
+        },
+        {
+          "text": "Output returns the updated User resource",
+          "passed": true,
+          "evidence": "returns User resource"
+        },
+        {
+          "text": "Verb is camelCase imperative (suspend, suspendUser, or similar)",
+          "passed": true,
+          "evidence": "suspend"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.889,
+        "passed": 8,
+        "failed": 1,
+        "total": 9,
+        "time_seconds": 99.1,
+        "tokens": 46028,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Identifies that `id: number` + `workspaceId` tuple should be a single hierarchical `name` string",
+          "passed": true,
+          "evidence": "point 4 + corrected schema use name: string"
+        },
+        {
+          "text": "Identifies that verb-in-path (/get-user, /list-users, /user/new) should be resource-oriented paths",
+          "passed": true,
+          "evidence": "point 2 explicit"
+        },
+        {
+          "text": "Identifies that POST /list-users should be GET on a resource path",
+          "passed": true,
+          "evidence": "line 41 'Method must be GET'"
+        },
+        {
+          "text": "Identifies that PUT for create should be POST",
+          "passed": true,
+          "evidence": "line 56 'Method must be POST, not PUT'"
+        },
+        {
+          "text": "Identifies that PUT-full-replace for update should be PATCH-partial",
+          "passed": true,
+          "evidence": "line 73 'Method must be PATCH, not PUT'"
+        },
+        {
+          "text": "Identifies that enum members should be UPPER_SNAKE_CASE with _UNSPECIFIED zero value",
+          "passed": true,
+          "evidence": "point 8 + corrected schema with ROLE_UNSPECIFIED"
+        },
+        {
+          "text": "Identifies that offset-based pagination should be cursor-based (limit + cursor)",
+          "passed": false,
+          "evidence": "Identifies offset is wrong but recommends pageSize/pageToken (v1 naming) at lines 43 and 123, not limit/cursor"
+        },
+        {
+          "text": "Cites at least two specific AIPs (e.g. AIP-121, AIP-126, AIP-130)",
+          "passed": true,
+          "evidence": "Cites AIP-121, AIP-122, AIP-123, AIP-126, AIP-130"
+        },
+        {
+          "text": "Provides a corrected version of the router (not just prose)",
+          "passed": true,
+          "evidence": "Full corrected router included"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 14,
+        "failed": 0,
+        "total": 14,
+        "time_seconds": 92.7,
+        "tokens": 39313,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Project path uses hierarchical pattern workspaces/{workspace}/projects/{project}",
+          "passed": true,
+          "evidence": "all project routes use the full hierarchical path"
+        },
+        {
+          "text": "Task path uses hierarchical pattern workspaces/{workspace}/projects/{project}/tasks/{task}",
+          "passed": true,
+          "evidence": "all task routes use the full hierarchical path"
+        },
+        {
+          "text": "Update procedure uses HTTP PATCH (not PUT)",
+          "passed": true,
+          "evidence": "lines 167 and 298"
+        },
+        {
+          "text": "Create procedure uses HTTP POST",
+          "passed": true,
+          "evidence": "lines 158 and 287"
+        },
+        {
+          "text": "Delete procedure uses HTTP DELETE",
+          "passed": true,
+          "evidence": "lines 178 and 309"
+        },
+        {
+          "text": "List procedure uses HTTP GET",
+          "passed": true,
+          "evidence": "lines 139 and 265"
+        },
+        {
+          "text": "Get procedure uses HTTP GET",
+          "passed": true,
+          "evidence": "lines 148 and 276"
+        },
+        {
+          "text": "List input uses limit + cursor pagination (not offset/limit, not pageSize/pageToken)",
+          "passed": true,
+          "evidence": "PageInput defines limit and cursor at lines 30-32"
+        },
+        {
+          "text": "Status enum has a *_UNSPECIFIED zero-value member",
+          "passed": true,
+          "evidence": "TASK_STATUS_UNSPECIFIED at line 45"
+        },
+        {
+          "text": "Priority enum has a *_UNSPECIFIED zero-value member",
+          "passed": true,
+          "evidence": "TASK_PRIORITY_UNSPECIFIED at line 61"
+        },
+        {
+          "text": "Enum members use UPPER_SNAKE_CASE (e.g. IN_PROGRESS, not in-progress)",
+          "passed": true,
+          "evidence": "IN_PROGRESS, BLOCKED, HIGH etc."
+        },
+        {
+          "text": "Project and Task schemas expose a `name: string` field as canonical identifier",
+          "passed": true,
+          "evidence": "name field on Project (line 84) and Task (line 198)"
+        },
+        {
+          "text": "Task does NOT embed Project as a nested object (references by name string instead)",
+          "passed": true,
+          "evidence": "task accessed via parent string path; assignee is also a name string at line 207-211"
+        },
+        {
+          "text": "Update input is partial (mutable fields optional, full resource not required)",
+          "passed": true,
+          "evidence": "patch: ProjectWritable.partial() at line 128; same for tasks line 252"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 99.9,
+        "tokens": 36764,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends a custom method (not standard create/update)",
+          "passed": true,
+          "evidence": "explicitly recommends users.suspend custom method"
+        },
+        {
+          "text": "Path uses colon-verb suffix (e.g. :suspend)",
+          "passed": true,
+          "evidence": "path: '/orgs/{org}/users/{user}:suspend'"
+        },
+        {
+          "text": "Path is scoped under the User resource",
+          "passed": true,
+          "evidence": "/orgs/{org}/users/{user}"
+        },
+        {
+          "text": "HTTP method is POST",
+          "passed": true,
+          "evidence": "method: 'POST'"
+        },
+        {
+          "text": "Output returns the updated User resource",
+          "passed": true,
+          "evidence": "output(User)"
+        },
+        {
+          "text": "Verb is camelCase imperative (suspend, suspendUser, or similar)",
+          "passed": true,
+          "evidence": "suspend"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 83.9,
+        "tokens": 37822,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Identifies that `id: number` + `workspaceId` tuple should be a single hierarchical `name` string",
+          "passed": true,
+          "evidence": "\u00a74 says expose name: string e.g. workspaces/42/users/7"
+        },
+        {
+          "text": "Identifies that verb-in-path (/get-user, /list-users, /user/new) should be resource-oriented paths",
+          "passed": true,
+          "evidence": "\u00a72 explicitly flags verb-in-path; recommends /workspaces/{workspace}/users/{user}"
+        },
+        {
+          "text": "Identifies that POST /list-users should be GET on a resource path",
+          "passed": true,
+          "evidence": "\u00a72 quote from AIP-130 about list being GET"
+        },
+        {
+          "text": "Identifies that PUT for create should be POST",
+          "passed": true,
+          "evidence": "\u00a72 table maps PUT /user/new to POST /users"
+        },
+        {
+          "text": "Identifies that PUT-full-replace for update should be PATCH-partial",
+          "passed": true,
+          "evidence": "\u00a72 quote 'A full-replace PUT is almost never what callers want'"
+        },
+        {
+          "text": "Identifies that enum members should be UPPER_SNAKE_CASE with _UNSPECIFIED zero value",
+          "passed": true,
+          "evidence": "\u00a77 explicit: UPPER_SNAKE_CASE + ROLE_UNSPECIFIED sentinel"
+        },
+        {
+          "text": "Identifies that offset-based pagination should be cursor-based (limit + cursor)",
+          "passed": true,
+          "evidence": "\u00a76 titled 'Pagination uses offset/limit instead of limit/cursor'"
+        },
+        {
+          "text": "Cites at least two specific AIPs (e.g. AIP-121, AIP-126, AIP-130)",
+          "passed": true,
+          "evidence": "Cites AIP-121, AIP-126, AIP-130 throughout"
+        },
+        {
+          "text": "Provides a corrected version of the router (not just prose)",
+          "passed": true,
+          "evidence": "Each section contains corrected code; final corrected router included"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 0.9393,
+        "stddev": 0.0562,
+        "min": 0.889,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 100.5333,
+        "stddev": 13.1089,
+        "min": 88.2,
+        "max": 114.3
+      },
+      "tokens": {
+        "mean": 44949.6667,
+        "stddev": 3499.4083,
+        "min": 41038,
+        "max": 47783
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 92.1667,
+        "stddev": 8.0133,
+        "min": 83.9,
+        "max": 99.9
+      },
+      "tokens": {
+        "mean": 37966.3333,
+        "stddev": 1280.6148,
+        "min": 36764,
+        "max": 39313
+      }
+    },
+    "delta": {
+      "pass_rate": "-0.06",
+      "time_seconds": "+8.4",
+      "tokens": "+6983"
+    }
+  },
+  "notes": []
+}

@@ -1,0 +1,50 @@
+{
+  "expectations": [
+    {
+      "text": "Recommends a custom method (not standard create/update)",
+      "passed": true,
+      "evidence": "Rejected PATCH /users/{userId} option; chose POST /v1/users/{userId}:suspend"
+    },
+    {
+      "text": "Path uses colon-verb suffix (e.g. :suspend)",
+      "passed": true,
+      "evidence": "POST /v1/users/{userId}:suspend"
+    },
+    {
+      "text": "Path is scoped under the User resource (orgs/{org}/users/{user} or users/{user})",
+      "passed": false,
+      "evidence": "Path is /v1/users/{userId}:suspend \u2014 flat under /users, NOT scoped under Org despite Org being a stated resource"
+    },
+    {
+      "text": "HTTP method is POST",
+      "passed": true,
+      "evidence": "method: 'POST'"
+    },
+    {
+      "text": "Input is minimal (just the resource name/path params, no resource body)",
+      "passed": true,
+      "evidence": "SuspendUserInputSchema has userId, reason, note, notifyUser, effectiveAt \u2014 no full User body"
+    },
+    {
+      "text": "Output returns the updated User resource (not void / not an Operation for a sync action)",
+      "passed": false,
+      "evidence": "SuspendUserOutputSchema wraps user + revokedSessionCount + notificationSent + suspendedAt \u2014 creates a custom response shape instead of returning the User resource directly (violates AIP-121 schema consistency)"
+    },
+    {
+      "text": "Explanation cites AIP-130 (or general reasoning about standard vs custom methods)",
+      "passed": true,
+      "evidence": "Cites Google AIP-136, AIP-134, AIP-158; general reasoning about custom vs standard is present"
+    },
+    {
+      "text": "Verb is camelCase imperative (suspend, suspendUser, or similar \u2014 not snake_case or kebab-case)",
+      "passed": true,
+      "evidence": "verb 'suspend' is lowercase imperative"
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 2,
+    "total": 8,
+    "pass_rate": 0.75
+  }
+}

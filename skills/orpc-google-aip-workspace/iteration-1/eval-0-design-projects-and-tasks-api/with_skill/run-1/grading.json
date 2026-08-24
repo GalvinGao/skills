@@ -1,0 +1,90 @@
+{
+  "expectations": [
+    {
+      "text": "Project path uses hierarchical pattern workspaces/{workspace}/projects/{project}",
+      "passed": true,
+      "evidence": "ProjectPattern constant line 70; get/update/delete routes /workspaces/{workspace}/projects/{project}"
+    },
+    {
+      "text": "Task path uses hierarchical pattern workspaces/{workspace}/projects/{project}/tasks/{task}",
+      "passed": true,
+      "evidence": "TaskPattern line 146; all task routes use full hierarchy"
+    },
+    {
+      "text": "Collection identifiers (workspaces, projects, tasks) are lowercase plural camelCase",
+      "passed": true,
+      "evidence": "workspaces, projects, tasks all lowercase plural"
+    },
+    {
+      "text": "Update procedure uses HTTP PATCH (not PUT)",
+      "passed": true,
+      "evidence": "lines 295 and 355 use method: 'PATCH'"
+    },
+    {
+      "text": "Create procedure uses HTTP POST",
+      "passed": true,
+      "evidence": "lines 287 and 344"
+    },
+    {
+      "text": "Delete procedure uses HTTP DELETE",
+      "passed": true,
+      "evidence": "lines 303 and 366"
+    },
+    {
+      "text": "List procedure uses HTTP GET",
+      "passed": true,
+      "evidence": "lines 267 and 322"
+    },
+    {
+      "text": "Get procedure uses HTTP GET",
+      "passed": true,
+      "evidence": "lines 279 and 333"
+    },
+    {
+      "text": "List input uses pageSize/pageToken cursor pagination (not offset/limit)",
+      "passed": true,
+      "evidence": "PageInput defines pageSize and pageToken at lines 41-46"
+    },
+    {
+      "text": "Status enum has a *_UNSPECIFIED zero-value member",
+      "passed": true,
+      "evidence": "TASK_STATUS_UNSPECIFIED at line 161"
+    },
+    {
+      "text": "Priority enum has a *_UNSPECIFIED zero-value member",
+      "passed": true,
+      "evidence": "TASK_PRIORITY_UNSPECIFIED at line 178"
+    },
+    {
+      "text": "Enum members use UPPER_SNAKE_CASE (e.g. IN_PROGRESS, not in-progress)",
+      "passed": true,
+      "evidence": "TASK_STATUS_IN_PROGRESS, TASK_PRIORITY_HIGH etc."
+    },
+    {
+      "text": "Project and Task schemas expose a `name: string` field as canonical identifier",
+      "passed": true,
+      "evidence": "name field on Project (line 80) and Task (line 191)"
+    },
+    {
+      "text": "Task does NOT embed Project as a nested object (references by name string instead)",
+      "passed": true,
+      "evidence": "task referenced via parent string; assignee is also a name string at line 205"
+    },
+    {
+      "text": "Update input supports partial fields + updateMask (not full resource replace)",
+      "passed": true,
+      "evidence": "patch = .partial() at lines 127, 244; updateMask field at lines 128-132, 245-246"
+    },
+    {
+      "text": "List/create inputs include a `parent` string field for the parent resource",
+      "passed": true,
+      "evidence": "parent field at lines 99, 115, 219, 234"
+    }
+  ],
+  "summary": {
+    "passed": 16,
+    "failed": 0,
+    "total": 16,
+    "pass_rate": 1.0
+  }
+}

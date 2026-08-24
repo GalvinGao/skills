@@ -1,0 +1,14 @@
+{
+  "summary": {"passed": 9, "failed": 0, "total": 9, "pass_rate": 1.0},
+  "expectations": [
+    {"text": "Identifies that `id: number` + `workspaceId` tuple should be a single hierarchical `name` string", "passed": true, "evidence": "§4 says expose name: string e.g. workspaces/42/users/7"},
+    {"text": "Identifies that verb-in-path (/get-user, /list-users, /user/new) should be resource-oriented paths", "passed": true, "evidence": "§2 explicitly flags verb-in-path; recommends /workspaces/{workspace}/users/{user}"},
+    {"text": "Identifies that POST /list-users should be GET on a resource path", "passed": true, "evidence": "§2 quote from AIP-130 about list being GET"},
+    {"text": "Identifies that PUT for create should be POST", "passed": true, "evidence": "§2 table maps PUT /user/new to POST /users"},
+    {"text": "Identifies that PUT-full-replace for update should be PATCH-partial", "passed": true, "evidence": "§2 quote 'A full-replace PUT is almost never what callers want'"},
+    {"text": "Identifies that enum members should be UPPER_SNAKE_CASE with _UNSPECIFIED zero value", "passed": true, "evidence": "§7 explicit: UPPER_SNAKE_CASE + ROLE_UNSPECIFIED sentinel"},
+    {"text": "Identifies that offset-based pagination should be cursor-based (limit + cursor)", "passed": true, "evidence": "§6 titled 'Pagination uses offset/limit instead of limit/cursor'"},
+    {"text": "Cites at least two specific AIPs (e.g. AIP-121, AIP-126, AIP-130)", "passed": true, "evidence": "Cites AIP-121, AIP-126, AIP-130 throughout"},
+    {"text": "Provides a corrected version of the router (not just prose)", "passed": true, "evidence": "Each section contains corrected code; final corrected router included"}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "skill_name": "orpc-google-aip",
+  "evals": [
+    {
+      "id": 0,
+      "name": "design-projects-and-tasks-api",
+      "prompt": "I'm building a project management tool with oRPC. Design the API surface for `Project` (belongs to a `Workspace`) and `Task` (belongs to a `Project`). Each task has a status (todo/in-progress/blocked/done) and a priority (low/medium/high). I want to be able to list, fetch, create, update, and delete both. Show me the Zod schemas and oRPC procedures with HTTP routes. Don't bother implementing the handlers — leave them as stubs.",
+      "expected_output": "TypeScript file(s) with Zod schemas for Workspace, Project, Task, and full oRPC router(s) for Project + Task with list/get/create/update/delete using AIP-compliant naming, hierarchical paths (workspaces/{workspace}/projects/{project}/tasks/{task}), PATCH for update, plural camelCase collections, enums with _UNSPECIFIED values, pageSize/pageToken pagination, and updateMask on update.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "name-and-path-a-new-endpoint",
+      "prompt": "I have an existing oRPC API for an internal HR app. There's a `User` resource and an `Org` resource. I need to add an operation that suspends a user account — sets their status, revokes active sessions, and sends a notification. What should I name this endpoint, what HTTP method and path should it use, and what should the input/output look like? Show the oRPC code.",
+      "expected_output": "Recommendation to model it as a custom method (since 'suspend' is a state-transition with side effects that don't fit standard methods), using POST /orgs/{org}/users/{user}:suspend (colon-verb suffix, scoped to the resource), with a clear input schema (just the user name) and output returning the updated User resource. Should cite AIP-130 reasoning.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "review-existing-api-for-violations",
+      "prompt": "Review this oRPC router and tell me what's wrong with it from an API design perspective. Be specific about what to change and why.\n\n```ts\nimport { os } from '@orpc/server'\nimport * as z from 'zod'\n\nconst User = z.object({\n  id: z.number().int(),\n  email: z.string().email(),\n  role: z.enum(['admin', 'user', 'guest']),\n  workspace: z.object({ id: z.number().int(), name: z.string() }),\n})\n\nexport const router = {\n  getUser: os\n    .route({ method: 'GET', path: '/get-user' })\n    .input(z.object({ userId: z.number(), workspaceId: z.number() }))\n    .output(User)\n    .handler(async () => ({} as any)),\n\n  listAllUsers: os\n    .route({ method: 'POST', path: '/list-users' })\n    .input(z.object({ workspaceId: z.number(), offset: z.number(), limit: z.number() }))\n    .output(z.array(User))\n    .handler(async () => []),\n\n  createNewUser: os\n    .route({ method: 'PUT', path: '/user/new' })\n    .input(User)\n    .output(User)\n    .handler(async () => ({} as any)),\n\n  updateUserData: os\n    .route({ method: 'PUT', path: '/user/update' })\n    .input(User)\n    .output(User)\n    .handler(async () => ({} as any)),\n}\n```",
+      "expected_output": "A diagnosis covering: (1) compound tuple identity instead of resource name, (2) embedded resource (workspace) instead of name reference, (3) non-resource-oriented paths (verb-in-path), (4) POST for list, PUT for create/update instead of POST/PATCH, (5) enum lowercase values without UNSPECIFIED, (6) offset/limit instead of pageSize/pageToken, (7) full replace on update instead of partial + updateMask, (8) procedure names like createNewUser instead of nested router shape (workspaces.users.create). Should cite specific AIPs.",
+      "files": []
+    }
+  ]
+}
