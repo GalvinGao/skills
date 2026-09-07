@@ -41,6 +41,7 @@ npx skills add -g GalvinGao/skills
 | [pr-visual-evidence](./skills/pr-visual-evidence/SKILL.md) | Open a PR for a visual change with a screenshot as the first line of its description, uploaded with `gh attach` |
 | [ready](./skills/ready/SKILL.md) | Commit, push, and create a draft PR with summary and verification checklist |
 | [resolve-issues](./skills/resolve-issues/SKILL.md) | Fix GitHub issues one by one, each with a commit that closes it |
+| [setup-high-quality-i18n](./skills/setup-high-quality-i18n/SKILL.md) | Discover project locales, choose product voice and audit tooling, and generate a tailored localization skill |
 | [setup-superset](./skills/setup-superset/SKILL.md) | Create `.superset/config.json` with setup and teardown scripts for Superset workspaces |
 | [summarize-pr](./skills/summarize-pr/SKILL.md) | Summarize PR changes in Simplified Chinese for non-technical stakeholders |
 | [swiftui-ui-patterns](./skills/swiftui-ui-patterns/SKILL.md) | Apply best-practice SwiftUI patterns for views, TabView architecture, and sheet flows |
