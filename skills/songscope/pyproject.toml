@@ -1,0 +1,45 @@
+[project]
+name = "songscope"
+version = "0.1.0"
+description = "Look inside a song: stems, beat grid, sections, sound events, control curves, and a mix fingerprint"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "numpy>=2",
+    "scipy>=1.14",
+    "soundfile>=0.13",
+    "soxr>=0.5",
+    "librosa>=1.0",
+    "matplotlib>=3.10",
+    "pyloudnorm>=0.2",
+    # Beats, downbeats, and labelled sections (intro/verse/chorus...), MLX port of allin1.
+    "all-in-one-mlx>=1.0.14",
+    # One-time conversion of the PyTorch htdemucs weights that allin1 demixes with.
+    "demucs-mlx[convert]>=1.4.14",
+    # Stem separation (Roformer / Demucs) on the Apple GPU.
+    "mlx-audio-separator>=0.1.17",
+    # Second, independent beat/downbeat tracker used to cross-check allin1.
+    "beat-this>=1.1.0",
+    # AudioSet sound-event detection (527 classes, 10 ms frames) to tag SFX and sparkles.
+    "panns-inference>=0.1.1",
+    "scikit-learn>=1.5",
+]
+
+[project.optional-dependencies]
+# Word timings: ASR draft and forced alignment of user-supplied lyrics to the vocal stem.
+lyrics = ["stable-ts[mlx]>=2.19"]
+
+[project.scripts]
+songscope = "songscope.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/songscope"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

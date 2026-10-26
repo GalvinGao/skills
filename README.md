@@ -43,6 +43,7 @@ npx skills add -g GalvinGao/skills
 | [resolve-issues](./skills/resolve-issues/SKILL.md) | Fix GitHub issues one by one, each with a commit that closes it |
 | [setup-high-quality-i18n](./skills/setup-high-quality-i18n/SKILL.md) | Discover project locales, choose product voice and audit tooling, and generate a tailored localization skill |
 | [setup-superset](./skills/setup-superset/SKILL.md) | Create `.superset/config.json` with setup and teardown scripts for Superset workspaces |
+| [songscope](./skills/songscope/SKILL.md) | Analyze a song on Apple Silicon: beat grid, sections, stems, sound events, mix fingerprint, timeline, and editor markers |
 | [summarize-pr](./skills/summarize-pr/SKILL.md) | Summarize PR changes in Simplified Chinese for non-technical stakeholders |
 | [swiftui-ui-patterns](./skills/swiftui-ui-patterns/SKILL.md) | Apply best-practice SwiftUI patterns for views, TabView architecture, and sheet flows |
 | [sync-simplelocalize](./skills/sync-simplelocalize/SKILL.md) | Push i18n translation keys/values from the current branch to SimpleLocalize, then revert local i18n diffs |
