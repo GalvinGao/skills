@@ -33,6 +33,7 @@ npx skills add -g GalvinGao/skills
 | [fix-ci](./skills/fix-ci/SKILL.md) | Diagnose failing GitHub Actions runs, apply fixes, push, and iterate until CI passes |
 | [fix-pr-comments](./skills/fix-pr-comments/SKILL.md) | Read unresolved PR comments, plan fixes, implement, and resolve addressed threads |
 | [frontend-design](./skills/frontend-design/SKILL.md) | Build distinctive, production-grade frontend interfaces with intentional visual direction |
+| [interface-craft](./skills/interface-craft/SKILL.md) | One build-order playbook for React UI craft: layout stability, gray ramp, corners, insets, overflow, loading, empty states, tours, motion, shortcuts, rename, optimistic updates, drag and drop, and Storybook checks |
 | [issues-dump](./skills/issues-dump/SKILL.md) | Convert informal issue dumps into GitHub issues via `gh` CLI |
 | [mediainfo](./skills/mediainfo/SKILL.md) | Inspect image/video assets with `ffprobe` for frontend work |
 | [no-use-effect](./skills/no-use-effect/SKILL.md) | Ban direct `useEffect` calls in React — use derived state, event handlers, data-fetching libraries, or `useMountEffect` instead |
